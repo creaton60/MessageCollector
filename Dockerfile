@@ -7,7 +7,6 @@ dpkg-reconfigure -f noninteractive tzdata
 RUN rm /usr/bin/curl
 VOLUME /tmp
 
-RUN gradle build
 COPY build/libs/*.jar app.jar
 
 RUN useradd -m deploy
