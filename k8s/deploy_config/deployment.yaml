@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: webtoon-collector
+    app.kubernetes.io/instance: webtoon-collector-instance
+    app.kubernetes.io/version: '1.0.0'
+    app.kubernetes.io/managed-by: kubectl
+  name: webtoon-collector-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webtoon-collector
+  template:
+    metadata:
+      labels:
+        app: webtoon-collector
+    spec:
+      containers:
+        - image: <IMAGE URL>
+          imagePullPolicy: Always
+          name: webtoon-collector
+          ports:
+            - containerPort: 8080
