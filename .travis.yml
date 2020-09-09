@@ -15,16 +15,21 @@ branches:
     - develop
     - sandbox
 
+services:
+  - docker
+
 # Travis CI 서버의 Cache 활성화
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.gradle'
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 
 # clean 후 Build (Build시 자동으로 test 수행)
 script:
-  # BUILD
-  - ./gradlew clean build
+  - gradle build
 
 after_success:
   - docker --version  # document the version travis is using
