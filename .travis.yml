@@ -1,4 +1,11 @@
+sudo: required #is required to use docker service in travis
+
 language: java
+
+env:
+  - APP_NAME=message-collector
+  - AWS_ECR_ACCOUNT=09500000
+
 jdk:
   - openjdk11
 
