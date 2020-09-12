@@ -1,4 +1,11 @@
+sudo: required #is required to use docker service in travis
+
 language: java
+
+env:
+  - APP_NAME=message-collector
+  - AWS_ECR_ACCOUNT=09500000
+
 jdk:
   - openjdk11
 
@@ -8,11 +15,28 @@ branches:
     - develop
     - sandbox
 
-# Travis CI 서버의 Cache 활성화
-cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.gradle'
+services:
+  - docker
+  - mongodb
 
 # clean 후 Build (Build시 자동으로 test 수행)
-script: "./gradlew clean build"
+script:
+  - ./gradlew clean build
+
+# Travis CI 서버의 Cache 활성화
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+after_success:
+  - docker --version  # document the version travis is using
+  - pip install --user awscli # install aws cli w/o sudo
+  - export PATH=$PATH:$HOME/.local/bin # put aws in the path
+  - eval $(aws ecr get-login --no-include-email --region ap-northeast-2) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
+  - docker build -t $APP_NAME:$TRAVIS_BUILD_ID .
+  - docker tag $APP_NAME:$TRAVIS_BUILD_ID 593352196761.dkr.ecr.ap-northeast-2.amazonaws.com/$APP_NAME:$TRAVIS_BUILD_ID
+  - docker push 593352196761.dkr.ecr.ap-northeast-2.amazonaws.com/$APP_NAME:$TRAVIS_BUILD_ID
