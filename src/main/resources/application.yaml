@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: sandbox
+
+
+---
+spring:
+  profiles: sandbox
+  application:
+    name: collector-sandbox
+
+---
+spring:
+  profiles: qa
+  application:
+    name: collector-qa
