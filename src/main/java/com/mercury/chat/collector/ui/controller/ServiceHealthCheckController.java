@@ -1,4 +1,4 @@
-package com.mercury.chat.collector.controller;
+package com.mercury.chat.collector.ui.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

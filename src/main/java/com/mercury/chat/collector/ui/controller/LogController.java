@@ -1,4 +1,4 @@
-package com.mercury.chat.collector.controller;
+package com.mercury.chat.collector.ui.controller;
 
 import com.mercury.chat.collector.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
