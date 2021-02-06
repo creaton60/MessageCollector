@@ -1,1 +1,0 @@
-package com.mercury.chat.collector.ui.view;
