@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 public class Log {
-    private String id;
-    private String message;
-    private LocalDateTime created;
+    private final String id;
+    private final String message;
+    private final LocalDateTime created;
 }
