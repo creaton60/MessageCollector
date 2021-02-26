@@ -7,4 +7,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class LogOperationService implements CreateLogUseCase {
+    @Override
+    public void insertCreateLog(CreateLogQuery query) {
+
+    }
 }
