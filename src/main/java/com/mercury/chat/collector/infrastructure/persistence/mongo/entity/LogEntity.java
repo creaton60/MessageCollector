@@ -1,5 +1,6 @@
 package com.mercury.chat.collector.infrastructure.persistence.mongo.entity;
 
+import com.mercury.chat.collector.domain.Log;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -21,5 +22,8 @@ public class LogEntity implements Serializable {
 
     private LocalDateTime lastModified;
 
-
+    public LogEntity(Log log) {
+        this.message = log.getMessage();
+        this.created = log.getCreated();
+    }
 }
