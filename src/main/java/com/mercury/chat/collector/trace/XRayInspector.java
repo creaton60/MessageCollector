@@ -1,4 +1,4 @@
-package com.mercury.chat.collector.config;
+package com.mercury.chat.collector.trace;
 
 import com.amazonaws.xray.entities.Subsegment;
 import com.amazonaws.xray.spring.aop.AbstractXRayInterceptor;
