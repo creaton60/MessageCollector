@@ -22,6 +22,14 @@ public class LogEntity implements Serializable {
 
     private LocalDateTime lastModified;
 
+    public Log convertLog() {
+        return Log.builder()
+                .id(this.id)
+                .message(this.message)
+                .created(this.created)
+                .build();
+    }
+
     public LogEntity(Log log) {
         this.message = log.getMessage();
         this.created = log.getCreated();
